@@ -1,16 +1,7 @@
 #!/usr/bin/python3
-import re
-import json
 import argparse
-import logging
 import subprocess as sb
 import requests
-
-
-def setup_logging():
-    logging.getLogger("requests").setLevel(logging.WARNING)
-    logging.getLogger("urllib3").setLevel(logging.WARNING)
-    logging.getLogger("subprocess").setLevel(logging.WARNING)
 
 
 def get_url_compatible_ip(ip):
@@ -86,6 +77,9 @@ if __name__ == '__main__':
 
     # Get all IPv6 addresses for the specified interface
     ips = _ping6_multicast(interface)
+
+    if not ips:
+        print('No robots found! Exiting...')
 
     for ip in ips:
         print()
